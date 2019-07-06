@@ -13,6 +13,10 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-#include <stdio.h>
+# include <math.h>
+# include "libft/libft.h"
+# include "/usr/local/include/mlx.h"
+
+# include <stdio.h>
 
 #endif
