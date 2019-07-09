@@ -16,7 +16,8 @@
 # include <math.h>
 # include "libft/libft.h"
 # include "/usr/local/include/mlx.h"
-
+# define DW 1600
+# define DH 900
 # include <stdio.h>
 
 #endif
