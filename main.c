@@ -1,5 +1,17 @@
 #include "fractol.h"
 
+int		ft_close_window(void)
+{
+	exit(0);
+}
+
+int		ft_key_press(int keycode)
+{
+	if (keycode == 53)
+		ft_close_window();
+	return (0);
+}
+
 void	ft_print_usage(void)
 {
 	ft_putstr("Usage: ./fractol [\n\t- Julia\n\t- Mandelbrot\n\t- optional\n]");
@@ -8,42 +20,92 @@ void	ft_print_usage(void)
 
 //int mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 
+//void	ft_scale(t_param *p, float scale)
+//{
+//	int	i;
+//	int	j;
+//
+//	i = 0;
+//	while (i < p->len_y)
+//	{
+//		j = 0;
+//		while (j < p->len_x)
+//		{
+//			p->arr_lst[i][j].x = p->arr_lst[i][j].x * scale;
+//			p->arr_lst[i][j].y = p->arr_lst[i][j].y * scale;
+//			p->arr_lst[i][j].z = p->arr_lst[i][j].z * scale;
+//			j++;
+//		}
+//		i++;
+//	}
+//}
+//
+//int		ft_mouse_press(int button, int x, int y, void *param)
+//{
+//	t_param	*p;
+//	int		scale;
+//
+//	x = x + y;
+//	p = (t_param*)param;
+//	scale = abs((int)p->arr_lst[0][p->len_x - 1].x - (int)p->arr_lst[0][0].x);
+//	mlx_clear_window(p->mlx_ptr, p->win_ptr);
+////	if (button == 1)
+////		p->press_mouse_l = 1;
+//	if (button == 5 && scale < LIMIT_SCALE_UP)
+//		ft_scale(p, 1.1);
+//	if (button == 4 && scale > LIMIT_SCALE_DOWN)
+//		ft_scale(p, 0.9);
+////	ft_draw_lines(p);
+//	return (0);
+//}
+
 void	ft_draw_fractal(void *mlx_ptr, void *win_ptr)
 {
-	double MinRe = -2.0;
-	double MaxRe = 1.0;
-	double MinIm = -1.2;
-	double MaxIm = 1.0;
-	double Re_factor = (MaxRe-MinRe)/(DW-1);
-	double Im_factor = (MaxIm-MinIm)/(DH-1);
-	unsigned MaxIterations = 30;
+	float MinRe = -2.5;
+	float MaxRe = 1.0;
+	float MinIm = -1.1;
+	float MaxIm = 1.1;
+//	int scale = -1;
+	float point[2];
+	float Re_coef = (MaxRe - MinRe) / (DW - 1);
+	float Im_coef = (MaxIm - MinIm) / (DH - 1);
+	int MaxIterations = 30;
+	int i;
+	int j;
+	int k;
+	float x;
+	float y;
+	float t;
 
-	for(unsigned y=0; y<DH; ++y)
+	point[1] = MaxIm;
+	i = 0;
+	while (i < DH)
 	{
-		double c_im = MaxIm - y*Im_factor;
-		for(unsigned x=0; x<DW; ++x)
+		j = 0;
+		point[0] = MinRe;
+		while (j < DW)
 		{
-			double c_re = MinRe + x*Re_factor;
-
-			double Z_re = c_re, Z_im = c_im;
-			int isInside = 1;
-			for(unsigned n=0; n<MaxIterations; ++n)
+			x = 0.0;
+			y = 0.0;
+			k = 0;
+			while (x * x + y * y <= 4 && k < MaxIterations)
 			{
-				double Z_re2 = Z_re*Z_re, Z_im2 = Z_im*Z_im;
-				if(Z_re2 + Z_im2 > 4)
-				{
-					isInside = 0;
-					break;
-				}
-				Z_im = 2*Z_re*Z_im + c_im;
-				Z_re = Z_re2 - Z_im2 + c_re;
+				t = x * x - y * y + point[0];
+				y = 2 * x * y + point[1];
+				x = t;
+				k++;
 			}
-			if(isInside) { mlx_pixel_put(mlx_ptr, win_ptr,  x, y, 0xFF0000); }
+			if(k == MaxIterations)
+				mlx_pixel_put(mlx_ptr, win_ptr,  j, i, 0xFF0000);
+			point[0] += Re_coef;
+			j++;
 		}
+		point[1] -= Im_coef;
+		i++;
 	}
 }
 
-void	ft_open_window()
+void	ft_open_window(void)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -54,8 +116,8 @@ void	ft_open_window()
 //	p->win_ptr = win_ptr;
 //	ft_add_coords(p);
 	ft_draw_fractal(mlx_ptr, win_ptr);
-//	mlx_hook(win_ptr, 17, 0, ft_close_window, p);
-//	mlx_hook(win_ptr, 2, 0, ft_key_press, p);
+	mlx_hook(win_ptr, 17, 0, ft_close_window, 0);
+	mlx_hook(win_ptr, 2, 0, ft_key_press, 0);
 //	mlx_hook(win_ptr, 4, 0, ft_mouse_press, p);
 //	mlx_hook(win_ptr, 5, 0, ft_mouse_release, p);
 //	mlx_hook(win_ptr, 6, 0, ft_mouse_move, p);
