@@ -18,6 +18,15 @@
 # include "/usr/local/include/mlx.h"
 # define DW 1600
 # define DH 900
+
+typedef struct 	s_asset
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	float 		scale;
+	int 		ix;
+	int 		iy;
+}				t_asset;
 # include <stdio.h>
 
 #endif

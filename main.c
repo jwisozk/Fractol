@@ -40,35 +40,20 @@ void	ft_print_usage(void)
 //	}
 //}
 //
-//int		ft_mouse_press(int button, int x, int y, void *param)
-//{
-//	t_param	*p;
-//	int		scale;
-//
-//	x = x + y;
-//	p = (t_param*)param;
-//	scale = abs((int)p->arr_lst[0][p->len_x - 1].x - (int)p->arr_lst[0][0].x);
-//	mlx_clear_window(p->mlx_ptr, p->win_ptr);
-////	if (button == 1)
-////		p->press_mouse_l = 1;
-//	if (button == 5 && scale < LIMIT_SCALE_UP)
-//		ft_scale(p, 1.1);
-//	if (button == 4 && scale > LIMIT_SCALE_DOWN)
-//		ft_scale(p, 0.9);
-////	ft_draw_lines(p);
-//	return (0);
-//}
 
-void	ft_draw_fractal(void *mlx_ptr, void *win_ptr)
+void	ft_draw_fractal(void *mlx_ptr, void *win_ptr, t_asset *p)
 {
 	float MinRe = -2.5;
 	float MaxRe = 1.0;
 	float MinIm = -1.1;
 	float MaxIm = 1.1;
-//	int scale = -1;
+	//	float scale = 1.5;
+	//	float xm = 300;
+	//	float ym = 300;
+	//
 	float point[2];
-	float Re_coef = (MaxRe - MinRe) / (DW - 1);
-	float Im_coef = (MaxIm - MinIm) / (DH - 1);
+	float Re_coef =(MaxRe - MinRe) / ((DW - 1) * p->scale);
+	float Im_coef =(MaxIm - MinIm) / ((DH - 1) * p->scale);
 	int MaxIterations = 30;
 	int i;
 	int j;
@@ -79,11 +64,11 @@ void	ft_draw_fractal(void *mlx_ptr, void *win_ptr)
 
 	point[1] = MaxIm;
 	i = 0;
-	while (i < DH)
+	while (i < DH * p->scale)
 	{
 		j = 0;
 		point[0] = MinRe;
-		while (j < DW)
+		while (j < DW * p->scale)
 		{
 			x = 0.0;
 			y = 0.0;
@@ -96,7 +81,7 @@ void	ft_draw_fractal(void *mlx_ptr, void *win_ptr)
 				k++;
 			}
 			if(k == MaxIterations)
-				mlx_pixel_put(mlx_ptr, win_ptr,  j, i, 0xFF0000);
+				mlx_pixel_put(mlx_ptr, win_ptr, j - p->ix, i - p->iy, 0xFF0000);
 			point[0] += Re_coef;
 			j++;
 		}
@@ -105,20 +90,59 @@ void	ft_draw_fractal(void *mlx_ptr, void *win_ptr)
 	}
 }
 
+int		ft_mouse_press(int button, int x, int y, t_asset *p)
+{
+	mlx_clear_window(p->mlx_ptr, p->win_ptr);
+	if (button == 5 && p->scale < 10)
+	{
+		p->ix += x;
+		p->iy += y;
+		p->scale += 1;
+	}
+	if (button == 4 && p->scale > 1)
+	{
+		p->ix -= x;
+		p->iy -= y;
+		p->scale -= 1;
+	}
+//	printf("scale = %f, x = %i, y = %i\n", p->scale, x, y);
+	ft_draw_fractal(p->mlx_ptr, p->win_ptr, p);
+
+//	if (button == 1)
+//		p->press_mouse_l = 1;
+//	if (button == 5 && scale < LIMIT_SCALE_UP)
+//		ft_draw_fractal(mlx_ptr, win_ptr, 1.1, );
+//		ft_scale(p, 1.1);
+//	if (button == 4 && scale > LIMIT_SCALE_DOWN)
+//		ft_scale(p, 0.9);
+//	ft_draw_lines(p);
+	return (0);
+}
+
+
+
 void	ft_open_window(void)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_asset	p;
 
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, DW, DH, "Fractal");
+
+	p.mlx_ptr = mlx_ptr;
+	p.win_ptr = win_ptr;
+	p.scale = 1.0;
+	p.ix = 0;
+	p.iy = 0;
+
 //	p->mlx_ptr = mlx_ptr;
 //	p->win_ptr = win_ptr;
 //	ft_add_coords(p);
-	ft_draw_fractal(mlx_ptr, win_ptr);
+	ft_draw_fractal(mlx_ptr, win_ptr, &p);
 	mlx_hook(win_ptr, 17, 0, ft_close_window, 0);
 	mlx_hook(win_ptr, 2, 0, ft_key_press, 0);
-//	mlx_hook(win_ptr, 4, 0, ft_mouse_press, p);
+	mlx_hook(win_ptr, 4, 0, ft_mouse_press, &p);
 //	mlx_hook(win_ptr, 5, 0, ft_mouse_release, p);
 //	mlx_hook(win_ptr, 6, 0, ft_mouse_move, p);
 	mlx_loop(mlx_ptr);
