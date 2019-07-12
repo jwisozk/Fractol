@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
+/*   Updated: 2019/07/12 15:46:06 by jwisozk          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 int		ft_close_window(void)
@@ -54,7 +66,7 @@ void	ft_draw_fractal(void *mlx_ptr, void *win_ptr, t_asset *p)
 	float point[2];
 	float Re_coef =(MaxRe - MinRe) / ((DW - 1) * p->scale);
 	float Im_coef =(MaxIm - MinIm) / ((DH - 1) * p->scale);
-	int MaxIterations = 30;
+	int MaxIterations = 60;
 	int i;
 	int j;
 	int k;
@@ -80,8 +92,10 @@ void	ft_draw_fractal(void *mlx_ptr, void *win_ptr, t_asset *p)
 				x = t;
 				k++;
 			}
-			if(k == MaxIterations)
-				mlx_pixel_put(mlx_ptr, win_ptr, j - p->ix, i - p->iy, 0xFF0000);
+			if (k < MaxIterations)
+				mlx_pixel_put(mlx_ptr, win_ptr, j - p->ix, i - p->iy, get_color(k, 0, MaxIterations));
+			else
+				mlx_pixel_put(mlx_ptr, win_ptr, j - p->ix, i - p->iy, 0x000000);
 			point[0] += Re_coef;
 			j++;
 		}

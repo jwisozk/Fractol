@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.13)
-project(fractol C)
+project(fractol)
 
-set(CMAKE_C_STANDARD 11)
-
-include_directories(.)
-include_directories(libft)
-
-add_executable(fractol
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra")
+set(LIBMLX ${CMAKE_SOURCE_DIR}/minilibx/libmlx.a)
+find_library(OPENGL OpenGL)
+find_library(APPKIT AppKit)
+set(SOURCE_FILES
         libft/ft_atoi.c
         libft/ft_atoi_base.c
         libft/ft_bzero.c
@@ -73,5 +72,6 @@ add_executable(fractol
         libft/ft_toupper.c
         libft/get_next_line.c
         libft/libft.h
-        fractol.h
-        main.c)
+        main.c color.c)
+add_executable(fractol ${SOURCE_FILES})
+target_link_libraries(fractol ${LIBMLX} ${OPENGL} ${APPKIT})

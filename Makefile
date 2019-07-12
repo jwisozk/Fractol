@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: jwisozk <jwisozk@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/07/05 19:30:24 by jwisozk           #+#    #+#              #
-#    Updated: 2019/07/05 19:31:36 by jwisozk          ###   ########.fr        #
+#    Created: 2019/07/12 13:27:33 by jwisozk           #+#    #+#              #
+#    Updated: 2019/07/12 13:27:33 by jwisozk          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fractol
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
 HEADERS = fractol.h
-LIBMLX = -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+LIBMLX = -L minilibx -lmlx -framework OpenGL -framework AppKit
 LIBFT = libft/libft.a
 MAKE_LIBFT = make -C libft
 SOURCE = main.c

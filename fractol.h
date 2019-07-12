@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/05 19:36:19 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/05 19:36:22 by jwisozk          ###   ########.fr       */
+/*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
+/*   Updated: 2019/07/12 15:14:10 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ typedef struct 	s_asset
 	int 		ix;
 	int 		iy;
 }				t_asset;
+
+typedef struct 	s_point
+{
+	int x;
+	int y;
+	int color;
+}				t_point;
+int get_color(int current, int start, int end);
+
+
 # include <stdio.h>
 
 #endif
