@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:50:10 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/12 19:15:17 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/13 17:48:41 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,26 @@
 
 void	ft_draw_fractal(void *mlx_ptr, void *win_ptr, t_asset *p)
 {
-	float MinRe = p->e.Re.min;
-	float MaxRe = p->e.Re.max;
-	float MinIm = p->e.Im.min;
-	float MaxIm = p->e.Im.max;
-	//	float scale = 1.5;
-	//	float xm = 300;
-	//	float ym = 300;
-	//
-	float point[2];
-	float Re_coef =(MaxRe - MinRe) / ((DW - 1));
-	float Im_coef =(MaxIm - MinIm) / ((DH - 1));
-	int MaxIterations = 100;
+
+
+	double point[2];
+	double Re_coef =(p->f.Re.max - p->f.Re.min) / ((DW - 1));
+	double Im_coef =(p->f.Im.max - p->f.Im.min) / ((DH - 1));
+	int MaxIterations = MAX_ITER;
 	int i;
 	int j;
 	int k;
-	float x;
-	float y;
-	float t;
+//	int n;
+	double x;
+	double y;
+	double t;
 
-	point[1] = MaxIm;
+	point[1] = p->f.Im.max;
 	i = 0;
 	while (i < DH)
 	{
 		j = 0;
-		point[0] = MinRe;
+		point[0] = p->f.Re.min;
 		while (j < DW)
 		{
 			x = 0.0;
@@ -52,7 +47,11 @@ void	ft_draw_fractal(void *mlx_ptr, void *win_ptr, t_asset *p)
 				k++;
 			}
 			if (k < MaxIterations)
+			{
+//				n = k % 16;
+//				mlx_pixel_put(mlx_ptr, win_ptr, j, i, p->rgb[n]);
 				mlx_pixel_put(mlx_ptr, win_ptr, j, i, get_color(k, 0, MaxIterations));
+			}
 			else
 				mlx_pixel_put(mlx_ptr, win_ptr, j, i, 0x000000);
 			point[0] += Re_coef;

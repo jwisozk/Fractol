@@ -6,7 +6,7 @@
 #    By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/12 13:27:33 by jwisozk           #+#    #+#              #
-#    Updated: 2019/07/12 17:04:02 by jwisozk          ###   ########.fr        #
+#    Updated: 2019/07/13 12:54:12 by jwisozk          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,12 @@ HEADERS = fractol.h
 LIBMLX = -L minilibx -lmlx -framework OpenGL -framework AppKit
 LIBFT = libft/libft.a
 MAKE_LIBFT = make -C libft
-SOURCE = main.c
+SOURCE = main.c \
+         draw.c  \
+         scale.c \
+         color.c \
+         keys.c \
+         mouse.c
 OBJ = $(SOURCE:.c=.o)
 
 all: $(NAME)

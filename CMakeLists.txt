@@ -72,6 +72,6 @@ set(SOURCE_FILES
         libft/ft_toupper.c
         libft/get_next_line.c
         libft/libft.h
-        main.c color.c scale.c draw.c)
+        main.c color.c scale.c draw.c keys.c mouse.c)
 add_executable(fractol ${SOURCE_FILES})
 target_link_libraries(fractol ${LIBMLX} ${OPENGL} ${APPKIT})
