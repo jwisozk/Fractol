@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/13 13:53:44 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/16 12:36:45 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_open_window(void)
 	p.f.Re.max = RE_MAX;
 	p.f.Im.min = IM_MIN;
 	p.f.Im.max = IM_MAX;
+	p.iter = MAX_ITER;
 	p.zoom = 1;
 	p.rgb[0] = ft_set_rgb(66, 30, 15);
 	p.rgb[1] = ft_set_rgb(25, 7, 26);

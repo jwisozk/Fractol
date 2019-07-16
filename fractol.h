@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/13 16:42:44 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/16 16:49:24 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "minilibx/mlx.h"
 # define DW 1600
 # define DH 900
-# define MAX_ITER 100
-# define STEP 10
+# define MAX_ITER 50
+# define STEP 1.01
 # define RE_MIN -2.5
 # define RE_MAX	1.0
 # define IM_MIN	-1.1
@@ -27,8 +27,8 @@
 
 typedef struct 	s_point
 {
-	double 		min;
-	double 		max;
+	long double 		min;
+	long double 		max;
 }				t_point;
 
 typedef struct 	s_fractal
@@ -49,6 +49,7 @@ typedef struct 	s_asset
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	int 		iter;
 	double 		scale;
 	double 		zoom;
 	t_fractal	f;
@@ -59,7 +60,7 @@ typedef struct 	s_asset
 
 int 			get_color(int current, int start, int end);
 void			ft_draw_fractal(void *mlx_ptr, void *win_ptr, t_asset *p);
-void			ft_scale(t_fractal* e,int mouse_x, int mouse_y, double scale);
+void			ft_scale(t_fractal* e,int mouse_x, int mouse_y, long double scale);
 int				ft_close_window(void);
 int				ft_key_press(int keycode);
 int				ft_mouse_press(int button, int x, int y, t_asset *p);
