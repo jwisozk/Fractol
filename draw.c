@@ -6,14 +6,13 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 16:59:55 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/16 17:01:31 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/18 13:05:18 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "fractol.h"
 
-void	ft_draw_fractal(void *mlx_ptr, void *win_ptr, t_asset *p)
+void	ft_draw_fractal(t_asset *p)
 {
 	double point[2];
 	double Re_coef =(p->f.Re.max - p->f.Re.min) / ((DW - 1));
@@ -48,15 +47,18 @@ void	ft_draw_fractal(void *mlx_ptr, void *win_ptr, t_asset *p)
 			if (k < MaxIterations)
 			{
 				n = k % 16;
-				mlx_pixel_put(mlx_ptr, win_ptr, j, i, p->rgb[n]);
+				p->img.img[i*DW + j] = p->rgb[n];
+//				mlx_pixel_put(p->mlx_ptr, p->win_ptr, j, i, p->rgb[n]);
 //				mlx_pixel_put(mlx_ptr, win_ptr, j, i, get_color(k, 0, MaxIterations));
 			}
 			else
-				mlx_pixel_put(mlx_ptr, win_ptr, j, i, 0x000000);
+//				mlx_pixel_put(p->mlx_ptr, p->win_ptr, j, i, 0x000000);
+				p->img.img[i*DW + j] = 0x000000;
 			point[0] += Re_coef;
 			j++;
 		}
 		point[1] -= Im_coef;
 		i++;
 	}
+	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img.img_ptr, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/16 12:36:45 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/18 14:00:30 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	ft_print_usage(void)
 	ft_putchar('\n');
 }
 
+//void *mlx_new_image(void *mlx_ptr, int width, int height);
+//char *mlx_get_data_addr(void *img_ptr, int *bits_per_pixel, int *size_line, int *endian);
+//int mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr, int x, int y);
+
 void	ft_open_window(void)
 {
 	void	*mlx_ptr;
@@ -26,6 +30,8 @@ void	ft_open_window(void)
 
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, DW, DH, "Fractal");
+	p.img.img_ptr = mlx_new_image(mlx_ptr, DW, DH);
+	p.img.img = (int*)mlx_get_data_addr(p.img.img_ptr, &p.img.bits_per_pixel, &p.img.size_line, &p.img.endian);
 
 	p.mlx_ptr = mlx_ptr;
 	p.win_ptr = win_ptr;
@@ -35,28 +41,10 @@ void	ft_open_window(void)
 	p.f.Im.min = IM_MIN;
 	p.f.Im.max = IM_MAX;
 	p.iter = MAX_ITER;
-	p.zoom = 1;
-	p.rgb[0] = ft_set_rgb(66, 30, 15);
-	p.rgb[1] = ft_set_rgb(25, 7, 26);
-	p.rgb[2] = ft_set_rgb(9, 1, 47);
-	p.rgb[3] = ft_set_rgb(4, 4, 73);
-	p.rgb[4] = ft_set_rgb(0, 7, 100);
-	p.rgb[5] = ft_set_rgb(12, 44, 138);
-	p.rgb[6] = ft_set_rgb(24, 82, 177);
-	p.rgb[7] = ft_set_rgb(57, 125, 209);
-	p.rgb[8] = ft_set_rgb(134, 181, 229);
-	p.rgb[9] = ft_set_rgb(211, 236, 248);
-	p.rgb[10] = ft_set_rgb(241, 233, 191);
-	p.rgb[11] = ft_set_rgb(248, 201, 95);
-	p.rgb[12] = ft_set_rgb(255, 170, 0);
-	p.rgb[13] = ft_set_rgb(204, 128, 0);
-	p.rgb[14] = ft_set_rgb(153, 87, 0);
-	p.rgb[15] = ft_set_rgb(106, 52, 3);
-
-
-	ft_draw_fractal(mlx_ptr, win_ptr, &p);
+	ft_set_init_colors(&p);
+	ft_draw_fractal(&p);
 	mlx_hook(win_ptr, 17, 0, ft_close_window, 0);
-	mlx_hook(win_ptr, 2, 0, ft_key_press, 0);
+	mlx_hook(win_ptr, 2, 0, ft_key_press, &p);
 	mlx_hook(win_ptr, 4, 0, ft_mouse_press, &p);
 //	mlx_hook(win_ptr, 5, 0, ft_mouse_release, p);
 //	mlx_hook(win_ptr, 6, 0, ft_mouse_move, p);
