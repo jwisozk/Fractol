@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/18 14:00:30 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/19 16:46:50 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ void	ft_open_window(void)
 
 	p.mlx_ptr = mlx_ptr;
 	p.win_ptr = win_ptr;
-	p.scale = 0;
 	p.f.Re.min = RE_MIN;
 	p.f.Re.max = RE_MAX;
 	p.f.Im.min = IM_MIN;
 	p.f.Im.max = IM_MAX;
 	p.iter = MAX_ITER;
+
+	p.key = 1;
 	ft_set_init_colors(&p);
+	printf("key = %i\n", p.key);
 	ft_draw_fractal(&p);
 	mlx_hook(win_ptr, 17, 0, ft_close_window, 0);
 	mlx_hook(win_ptr, 2, 0, ft_key_press, &p);

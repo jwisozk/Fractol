@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 16:59:55 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/18 13:05:18 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/19 16:46:50 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_draw_fractal(t_asset *p)
 	double point[2];
 	double Re_coef =(p->f.Re.max - p->f.Re.min) / ((DW - 1));
 	double Im_coef =(p->f.Im.max - p->f.Im.min) / ((DH - 1));
-	int MaxIterations = p->iter;
+	int MaxIter = p->iter;
 	int i;
 	int j;
 	int k;
@@ -37,22 +37,24 @@ void	ft_draw_fractal(t_asset *p)
 			x = 0.0;
 			y = 0.0;
 			k = 0;
-			while (x * x + y * y <= 4 && k < MaxIterations)
+			while (x * x + y * y <= 4 && k < MaxIter)
 			{
 				t = x * x - y * y + point[0];
 				y = 2 * x * y + point[1];
 				x = t;
 				k++;
 			}
-			if (k < MaxIterations)
+			if (k < MaxIter)
 			{
-				n = k % 16;
-				p->img.img[i*DW + j] = p->rgb[n];
-//				mlx_pixel_put(p->mlx_ptr, p->win_ptr, j, i, p->rgb[n]);
-//				mlx_pixel_put(mlx_ptr, win_ptr, j, i, get_color(k, 0, MaxIterations));
+				if (p->key == 1 || p->key == 2)
+				{
+					n = k % 16;
+					p->img.img[i*DW + j] = p->rgb[n];
+				}
+				else
+					p->img.img[i*DW + j] = get_color(k, 0, MaxIter, p->key);
 			}
 			else
-//				mlx_pixel_put(p->mlx_ptr, p->win_ptr, j, i, 0x000000);
 				p->img.img[i*DW + j] = 0x000000;
 			point[0] += Re_coef;
 			j++;
