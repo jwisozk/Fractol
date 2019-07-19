@@ -20,7 +20,7 @@ int		ft_mouse_press(int button, int x, int y, t_asset *p)
 		p->iter += STEP * 3;
 		ft_scale(&p->f, x, DH - y, STEP);
 	}
-	if (button == 4 && p->iter > MAX_ITER)
+	if (button == 4)
 	{
 		p->iter -= STEP * 3;
 		ft_scale(&p->f, x, y, 1.0 / STEP);
