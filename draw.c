@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 16:59:55 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/19 16:46:50 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/20 10:02:02 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,33 @@
 
 void	ft_draw_fractal(t_asset *p)
 {
-	double point[2];
-	double Re_coef =(p->f.Re.max - p->f.Re.min) / ((DW - 1));
-	double Im_coef =(p->f.Im.max - p->f.Im.min) / ((DH - 1));
-	int MaxIter = p->iter;
+	t_point point;
+	p->delta.Re = (p->f.ReMax - p->f.ReMin) / ((DW - 1));
+	p->delta.Im = (p->f.ImMax - p->f.ImMin) / ((DH - 1));
 	int i;
 	int j;
 	int k;
 	int n;
-	double x;
-	double y;
-	double t;
 
-	point[1] = p->f.Im.max;
+	point.y = p->f.ImMax;
 	i = 0;
 	while (i < DH)
 	{
 		j = 0;
-		point[0] = p->f.Re.min;
+		point.x = p->f.ReMin;
 		while (j < DW)
 		{
-			x = 0.0;
-			y = 0.0;
+			p->x = 0.0;
+			p->y = 0.0;
 			k = 0;
-			while (x * x + y * y <= 4 && k < MaxIter)
+			while (p->x * p->x + p->y * p->y <= 4 && k < p->MaxIter)
 			{
-				t = x * x - y * y + point[0];
-				y = 2 * x * y + point[1];
-				x = t;
+				p->t = p->x *p->x - p->y * p->y + point.x;
+				p->y = 2 * p->x * p->y + point.y;
+				p->x = p->t;
 				k++;
 			}
-			if (k < MaxIter)
+			if (k < p->MaxIter)
 			{
 				if (p->key == 1 || p->key == 2)
 				{
@@ -52,14 +48,14 @@ void	ft_draw_fractal(t_asset *p)
 					p->img.img[i*DW + j] = p->rgb[n];
 				}
 				else
-					p->img.img[i*DW + j] = get_color(k, 0, MaxIter, p->key);
+					p->img.img[i*DW + j] = get_color(k, 0, p->MaxIter, p->key);
 			}
 			else
 				p->img.img[i*DW + j] = 0x000000;
-			point[0] += Re_coef;
+			point.x += p->delta.Re;
 			j++;
 		}
-		point[1] -= Im_coef;
+		point.y -= p->delta.Im;
 		i++;
 	}
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img.img_ptr, 0, 0);

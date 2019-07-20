@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/19 20:03:26 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/20 10:02:02 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,45 +27,47 @@
 
 typedef struct 	s_point
 {
-	long double 		min;
-	long double 		max;
+	long double x;
+	long double y;
 }				t_point;
 
 typedef struct 	s_fractal
 {
-	t_point 	Re;
-	t_point 	Im;
-
+	long double ReMin;
+	long double ReMax;
+	long double ImMin;
+	long double ImMax;
 }				t_fractal;
 
-//typedef struct 	s_color
-//{
-//	int 		r;
-//	int 		g;
-//	int 		b;
-//}				t_color;
+typedef struct 	s_delta
+{
+	long double	Re;
+	long double	Im;
+}				t_delta;
 
 typedef struct	s_img
 {
-	int 	bits_per_pixel;
-	int 	size_line;
-	int 	endian;
-	void	*img_ptr;
-	int 	*img;
+	int 		bits_per_pixel;
+	int 		size_line;
+	int 		endian;
+	void		*img_ptr;
+	int 		*img;
 }				t_img;
 
 typedef struct 	s_asset
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	int 		iter;
+	int 		MaxIter;
 	t_fractal	f;
 	int			rgb[16];
 	t_img		img;
 	int 		key;
-
+	t_delta		delta;
+	long double x;
+	long double y;
+	long double t;
 }				t_asset;
-
 
 int 			get_color(int current, int start, int end, int key);
 void			ft_draw_fractal(t_asset *p);

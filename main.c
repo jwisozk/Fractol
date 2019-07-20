@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/19 16:46:50 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/20 10:02:02 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@ void	ft_print_usage(void)
 	ft_putstr("Usage: ./fractol [\n\t- Julia\n\t- Mandelbrot\n\t- optional\n]");
 	ft_putchar('\n');
 }
-
-//void *mlx_new_image(void *mlx_ptr, int width, int height);
-//char *mlx_get_data_addr(void *img_ptr, int *bits_per_pixel, int *size_line, int *endian);
-//int mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr, int x, int y);
 
 void	ft_open_window(void)
 {
@@ -35,15 +31,14 @@ void	ft_open_window(void)
 
 	p.mlx_ptr = mlx_ptr;
 	p.win_ptr = win_ptr;
-	p.f.Re.min = RE_MIN;
-	p.f.Re.max = RE_MAX;
-	p.f.Im.min = IM_MIN;
-	p.f.Im.max = IM_MAX;
-	p.iter = MAX_ITER;
+	p.f.ReMin = RE_MIN;
+	p.f.ReMax = RE_MAX;
+	p.f.ImMin = IM_MIN;
+	p.f.ImMax = IM_MAX;
+	p.MaxIter = MAX_ITER;
 
 	p.key = 1;
 	ft_set_init_colors(&p);
-	printf("key = %i\n", p.key);
 	ft_draw_fractal(&p);
 	mlx_hook(win_ptr, 17, 0, ft_close_window, 0);
 	mlx_hook(win_ptr, 2, 0, ft_key_press, &p);

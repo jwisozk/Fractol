@@ -36,29 +36,29 @@ int		ft_key_press(int keycode, t_asset *p)
 	if (keycode == 123 || keycode == 0)
 	{
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		p->f.Re.min += 0.01;
-		p->f.Re.max += 0.01;
+		p->f.ReMin += 0.01;
+		p->f.ReMax += 0.01;
 		ft_draw_fractal(p);
 	}
 	if (keycode == 124 || keycode == 2)
 	{
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		p->f.Re.min -= 0.01;
-		p->f.Re.max -= 0.01;
+		p->f.ReMin -= 0.01;
+		p->f.ReMax -= 0.01;
 		ft_draw_fractal(p);
 	}
 	if (keycode == 126 || keycode == 13)
 	{
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		p->f.Im.min -= 0.01;
-		p->f.Im.max -= 0.01;
+		p->f.ImMin -= 0.01;
+		p->f.ImMax -= 0.01;
 		ft_draw_fractal(p);
 	}
 	if (keycode == 125 || keycode == 1)
 	{
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		p->f.Im.min += 0.01;
-		p->f.Im.max += 0.01;
+		p->f.ImMin += 0.01;
+		p->f.ImMax += 0.01;
 		ft_draw_fractal(p);
 	}
 //	if (keycode == 19)
