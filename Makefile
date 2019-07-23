@@ -6,7 +6,7 @@
 #    By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/12 13:27:33 by jwisozk           #+#    #+#              #
-#    Updated: 2019/07/13 12:54:12 by jwisozk          ###   ########.fr        #
+#    Updated: 2019/07/20 15:38:52 by jwisozk          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $^ $(LIBFT) $(LIBMLX) -o $(NAME)
 
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -pthread -c $<
 
 clean:
 	rm -f $(OBJ)

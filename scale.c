@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:27:57 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/20 10:03:11 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/23 18:11:51 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void applyZoom(t_fractal* e, long double mouseRe, long double mouseIm, long doub
 	e->ImMin = interpolate(mouseIm, e->ImMin, interpolation);
 	e->ReMax = interpolate(mouseRe, e->ReMax, interpolation);
 	e->ImMax = interpolate(mouseIm, e->ImMax, interpolation);
-//	printf("ReMin = %.20Lf\nReMax = %.20Lf\nImMin = %.20Lf\nImMax = %.20Lf\n\n\n\n", e->ReMin, e->ReMax, e->ImMin, e->ImMax);
+	printf("ReMin = %.100Lf\nReMax = %.100Lf\nImMin = %.100Lf\nImMax = %.100Lf\n\n\n\n", e->ReMin, e->ReMax, e->ImMin, e->ImMax);
 }
 
 void	ft_scale(t_fractal* e, int mouse_x, int mouse_y, long double scale)

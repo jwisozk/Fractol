@@ -6,13 +6,14 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/20 10:02:02 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/23 18:25:57 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+# include <pthread.h>
 # include <math.h>
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
@@ -51,7 +52,7 @@ typedef struct	s_img
 	int 		size_line;
 	int 		endian;
 	void		*img_ptr;
-	int 		*img;
+	int 		*img_arr;
 }				t_img;
 
 typedef struct 	s_asset
@@ -67,9 +68,26 @@ typedef struct 	s_asset
 	long double x;
 	long double y;
 	long double t;
+	int 		i;
+	t_point 	point;
 }				t_asset;
 
-int 			get_color(int current, int start, int end, int key);
+//typedef struct 	s_thread
+//{
+//	t_point 	point;
+//	t_fractal	f;
+//	t_delta		delta;
+//	int 		arr[DW * DH];
+//	int 		MaxIter;
+//	int 		key;
+//	int 		i;
+//	long double x;
+//	long double y;
+//	long double t;
+//	int			*rgb;
+//}				t_thread;
+
+int 			get_color(int current, int start, t_asset *p);
 void			ft_draw_fractal(t_asset *p);
 void			ft_scale(t_fractal* e,int mouse_x, int mouse_y, long double scale);
 int				ft_close_window(void);
@@ -79,6 +97,7 @@ int 			ft_set_rgb(int r, int g, int b);
 void 			ft_set_random_colors(t_asset *p);
 void 			ft_set_init_colors(t_asset *p);
 void 			ft_set_second_colors(t_asset *p);
+void			ft_init_fractal(t_asset *p);
 
 # include <stdio.h>
 
