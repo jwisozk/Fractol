@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/23 18:25:57 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/23 21:34:40 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 # define DW 1600
 # define DH 900
 # define MAX_ITER 50
-# define STEP 2
-# define RE_MIN -2.5
-# define RE_MAX	1.0
-# define IM_MIN	-1.1
-# define IM_MAX 1.1
+# define SCALE 2
+# define OFFSET 10
+# define RE_MIN -3.5
+# define RE_MAX	3.5
+# define IM_MIN	-2.0
+# define IM_MAX 2.0
 
 typedef struct 	s_point
 {
@@ -69,26 +70,12 @@ typedef struct 	s_asset
 	long double y;
 	long double t;
 	int 		i;
+	int 		j;
 	t_point 	point;
 }				t_asset;
 
-//typedef struct 	s_thread
-//{
-//	t_point 	point;
-//	t_fractal	f;
-//	t_delta		delta;
-//	int 		arr[DW * DH];
-//	int 		MaxIter;
-//	int 		key;
-//	int 		i;
-//	long double x;
-//	long double y;
-//	long double t;
-//	int			*rgb;
-//}				t_thread;
-
 int 			get_color(int current, int start, t_asset *p);
-void			ft_draw_fractal(t_asset *p);
+void			ft_draw_mandelbrot(t_asset *p);
 void			ft_scale(t_fractal* e,int mouse_x, int mouse_y, long double scale);
 int				ft_close_window(void);
 int				ft_key_press(int keycode, t_asset *p);
@@ -98,6 +85,7 @@ void 			ft_set_random_colors(t_asset *p);
 void 			ft_set_init_colors(t_asset *p);
 void 			ft_set_second_colors(t_asset *p);
 void			ft_init_fractal(t_asset *p);
+void			ft_init_fractals(t_asset *main, t_asset *p);
 
 # include <stdio.h>
 
