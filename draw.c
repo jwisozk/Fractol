@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 16:59:55 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/24 17:51:17 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/24 20:22:28 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void	ft_get_iter(t_asset *p)
 {
 	int iter;
 
+	if (p->julia != 1)
+	{
+		p->cx = p->point.x;
+		p->cy = p->point.y;
+	}
 	p->x = p->point.x;
 	p->y = p->point.y;
 	iter = 0;
@@ -50,8 +55,8 @@ void	ft_get_iter(t_asset *p)
 		p->dy = p->y * p->y;
 		if (p->dx + p->dy > 4.0)
 			break ;
-		p->y = 2.0 * p->x * p->y + p->point.y;
-		p->x = p->dx - p->dy + p->point.x;
+		p->y = 2.0 * p->x * p->y + p->cy;
+		p->x = p->dx - p->dy + p->cx;
 		iter++;
 	}
 	ft_put_color(p, iter);

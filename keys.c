@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 12:52:18 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/24 18:08:16 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/24 20:06:25 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int		ft_key_press(int keycode, t_asset *p)
 		ft_close_window();
 	if (keycode == 19)
 	{
-		printf("%i\n",p->key);
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		p->key++;
 		if (p->key == 1)
@@ -67,6 +66,20 @@ int		ft_key_press(int keycode, t_asset *p)
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		ft_init_fractal(p);
 		ft_draw_fractal(p);
+	}
+	if (keycode == 20)
+	{
+		printf("%i\n",p->julia);
+		if (p->julia == 0)
+		{
+			p->julia = 1;
+			p->cx = CX;
+			p->cy = CY;
+			mlx_clear_window(p->mlx_ptr, p->win_ptr);
+			ft_draw_fractal(p);
+		}
+		else
+			p->julia = 0;
 	}
 	return (0);
 }

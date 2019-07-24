@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/24 18:20:51 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/24 20:24:25 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define SCALE 2
 # define OFFSET 10
 # define RE_LEN 10
+# define CX -0.70176
+# define CY -0.3842
 # define INIT_COLOR 0x19071A, 0x09012F, 0x040449, 0x000764, 0x0C2C8A, 0x1852B1,\
 					0x397DD1, 0x86B5E5, 0xD3ECF8, 0xF1E9BF, 0xF8C95F, 0xFFAA00,\
 					0xCC8000, 0x995700, 0x6A3403, 0x421E0F
@@ -74,8 +76,11 @@ typedef struct 	s_asset
 	long double y;
 	long double dx;
 	long double dy;
+	long double cx;
+	long double cy;
 	int 		i;
 	int 		j;
+	int 		julia;
 	t_point 	point;
 }				t_asset;
 
@@ -91,6 +96,7 @@ void 			ft_set_init_colors(t_asset *p);
 void 			ft_set_second_colors(t_asset *p);
 void			ft_init_fractal(t_asset *p);
 void			ft_init_fractals(t_asset *main, t_asset *p);
+int				ft_mouse_move(int x, int y, t_asset *p);
 
 # include <stdio.h>
 

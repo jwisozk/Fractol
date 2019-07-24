@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/24 18:12:55 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/24 20:46:51 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	ft_init_fractal(t_asset *p)
 	p->f.ImMax = p->f.ImMin + h;
 	p->MaxIter = MAX_ITER;
 	p->key = 1;
+	p->julia = 0;
+	p->cx = CX;
+	p->cy = CY;
 	ft_set_init_colors(p);
 }
 
@@ -43,6 +46,9 @@ void	ft_init_fractals(t_asset *main, t_asset *p)
 	p->MaxIter = main->MaxIter;
 	p->key = main->key;
 	p->i = main->i;
+	p->julia = main->julia;
+	p->cx = main->cx;
+	p->cy = main->cy;
 	p->img.img_arr = main->img.img_arr;
 }
 
@@ -64,7 +70,7 @@ void	ft_open_window(void)
 	mlx_hook(win_ptr, 2, 0, ft_key_press, &p);
 	mlx_hook(win_ptr, 4, 0, ft_mouse_press, &p);
 //	mlx_hook(win_ptr, 5, 0, ft_mouse_release, p);
-//	mlx_hook(win_ptr, 6, 0, ft_mouse_move, p);
+	mlx_hook(win_ptr, 6, 0, ft_mouse_move, &p);
 	mlx_loop(mlx_ptr);
 }
 
