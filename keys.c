@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 12:52:18 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/23 21:51:24 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/24 18:08:16 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_key_press(int keycode, t_asset *p)
 			ft_set_init_colors(p);
 		if (p->key == 2)
 			ft_set_second_colors(p);
-		ft_draw_mandelbrot(p);
+		ft_draw_fractal(p);
 		if (p->key == 6)
 			p->key = 0;
 	}
@@ -39,34 +39,34 @@ int		ft_key_press(int keycode, t_asset *p)
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		p->f.ReMin += p->delta.Re * OFFSET;
 		p->f.ReMax += p->delta.Re * OFFSET;
-		ft_draw_mandelbrot(p);
+		ft_draw_fractal(p);
 	}
 	if (keycode == 124 || keycode == 2)
 	{
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		p->f.ReMin -= p->delta.Re * OFFSET;
 		p->f.ReMax -= p->delta.Re * OFFSET;
-		ft_draw_mandelbrot(p);
+		ft_draw_fractal(p);
 	}
 	if (keycode == 125 || keycode == 1)
 	{
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		p->f.ImMin -= p->delta.Im * OFFSET;
 		p->f.ImMax -= p->delta.Im * OFFSET;
-		ft_draw_mandelbrot(p);
+		ft_draw_fractal(p);
 	}
 	if (keycode == 126 || keycode == 13)
 	{
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		p->f.ImMin += p->delta.Im * OFFSET;
 		p->f.ImMax += p->delta.Im * OFFSET;
-		ft_draw_mandelbrot(p);
+		ft_draw_fractal(p);
 	}
 	if (keycode == 18)
 	{
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		ft_init_fractal(p);
-		ft_draw_mandelbrot(p);
+		ft_draw_fractal(p);
 	}
 	return (0);
 }

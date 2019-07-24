@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 12:54:18 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/23 20:51:02 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/24 13:18:50 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int		ft_mouse_press(int button, int x, int y, t_asset *p)
 		p->MaxIter += SCALE * 3;
 		ft_scale(&p->f, x, y, SCALE);
 	}
-	if (button == 4 && p->f.ReMax - p->f.ReMin < 200)
+	if (button == 4 && p->f.ReMax - p->f.ReMin < 1000)
 	{
 		p->MaxIter -= SCALE * 3;
 		ft_scale(&p->f, x, y, 1.0 / SCALE);
 	}
-	ft_draw_mandelbrot(p);
+	ft_draw_fractal(p);
 	return (0);
 }

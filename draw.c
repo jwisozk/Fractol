@@ -6,27 +6,23 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 16:59:55 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/23 20:51:02 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/24 17:51:17 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_put_color(t_asset *p)
+int		ft_print_error(char *str)
 {
-	int iter;
+	ft_putstr(str);
+	ft_putchar('\n');
+	exit(0);
+}
+
+void	ft_put_color(t_asset *p, int iter)
+{
 	int n;
 
-	p->x = 0.0;
-	p->y = 0.0;
-	iter = 0;
-	while (p->x * p->x + p->y * p->y <= 4 && iter < p->MaxIter)
-	{
-		p->t = p->x * p->x - p->y * p->y + p->point.x;
-		p->y = 2 * p->x * p->y + p->point.y;
-		p->x = p->t;
-		iter++;
-	}
 	if (iter < p->MaxIter)
 	{
 		if (p->key == 1 || p->key == 2)
@@ -41,6 +37,26 @@ void	ft_put_color(t_asset *p)
 		p->img.img_arr[p->i * DW + p->j] = 0x000000;
 }
 
+void	ft_get_iter(t_asset *p)
+{
+	int iter;
+
+	p->x = p->point.x;
+	p->y = p->point.y;
+	iter = 0;
+	while (iter < p->MaxIter)
+	{
+		p->dx = p->x * p->x;
+		p->dy = p->y * p->y;
+		if (p->dx + p->dy > 4.0)
+			break ;
+		p->y = 2.0 * p->x * p->y + p->point.y;
+		p->x = p->dx - p->dy + p->point.x;
+		iter++;
+	}
+	ft_put_color(p, iter);
+}
+
 void *ft_row(void *data)
 {
 	t_asset *p;
@@ -50,17 +66,18 @@ void *ft_row(void *data)
 	p->j = 0;
 	while (p->j < DW)
 	{
-		ft_put_color(p);
+		ft_get_iter(p);
 		p->point.x += p->delta.Re;
 		p->j++;
 	}
 	return (NULL);
 }
 
-void	ft_draw_mandelbrot(t_asset *p)
+void	ft_draw_fractal(t_asset *p)
 {
 	pthread_t* threadsId;
 	t_asset* threadData;
+	int s;
 
 	threadsId = (pthread_t*) malloc(DH * sizeof(pthread_t));
 	threadData = (t_asset*) malloc(DH * sizeof(t_asset));
@@ -71,13 +88,16 @@ void	ft_draw_mandelbrot(t_asset *p)
 	while (p->i < DH)
 	{
 		ft_init_fractals(p, &threadData[p->i]);
-		pthread_create(&(threadsId[p->i]), NULL, ft_row, &threadData[p->i]);
+		s = pthread_create(&(threadsId[p->i]), NULL, ft_row, &threadData[p->i]);
+		if (s != 0)
+			ft_print_error("Error: the thread has not been created.");
 		p->point.y += p->delta.Im;
 		p->i++;
 	}
 	p->i = 0;
 	while (p->i < DH)
-		pthread_join(threadsId[p->i++], NULL);
+		if (pthread_join(threadsId[p->i++], NULL) != 0)
+			ft_print_error("Error: the threads has not been joined.");
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img.img_ptr, 0, 0);
 	free(threadsId);
 	free(threadData);

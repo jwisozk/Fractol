@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/23 20:51:02 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/24 18:12:55 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ void	ft_print_usage(void)
 }
 void	ft_init_fractal(t_asset *p)
 {
-	p->f.ReMin = RE_MIN;
-	p->f.ReMax = RE_MAX;
-	p->f.ImMin = IM_MIN;
-	p->f.ImMax = IM_MAX;
+	long double w = RE_LEN;
+	long double h = (w * DH) / DW;
+
+	p->f.ReMin = -w / 2;
+	p->f.ReMax = p->f.ReMin + w;
+	p->f.ImMin = -h / 2;
+	p->f.ImMax = p->f.ImMin + h;
 	p->MaxIter = MAX_ITER;
 	p->key = 1;
 	ft_set_init_colors(p);
@@ -50,13 +53,13 @@ void	ft_open_window(void)
 	t_asset	p;
 
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, DW, DH, "Fractal");
+	win_ptr = mlx_new_window(mlx_ptr, DW, DH + HEADER, "Fractal");
 	p.img.img_ptr = mlx_new_image(mlx_ptr, DW, DH);
 	p.img.img_arr = (int*)mlx_get_data_addr(p.img.img_ptr, &p.img.bits_per_pixel, &p.img.size_line, &p.img.endian);
 	p.mlx_ptr = mlx_ptr;
 	p.win_ptr = win_ptr;
 	ft_init_fractal(&p);
-	ft_draw_mandelbrot(&p);
+	ft_draw_fractal(&p);
 	mlx_hook(win_ptr, 17, 0, ft_close_window, 0);
 	mlx_hook(win_ptr, 2, 0, ft_key_press, &p);
 	mlx_hook(win_ptr, 4, 0, ft_mouse_press, &p);

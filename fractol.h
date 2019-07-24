@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/23 21:34:40 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/24 18:20:51 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,20 @@
 # include <math.h>
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
+
 # define DW 1600
-# define DH 900
+# define DH 855
+# define HEADER 45
 # define MAX_ITER 50
 # define SCALE 2
 # define OFFSET 10
-# define RE_MIN -3.5
-# define RE_MAX	3.5
-# define IM_MIN	-2.0
-# define IM_MAX 2.0
-
+# define RE_LEN 10
+# define INIT_COLOR 0x19071A, 0x09012F, 0x040449, 0x000764, 0x0C2C8A, 0x1852B1,\
+					0x397DD1, 0x86B5E5, 0xD3ECF8, 0xF1E9BF, 0xF8C95F, 0xFFAA00,\
+					0xCC8000, 0x995700, 0x6A3403, 0x421E0F
+# define SCND_COLOR 0xD67D4C, 0xA62F2B, 0xEBC258, 0x711F3C, 0x488B81, 0xEBC258,\
+					0xD67D4C, 0xA62F2B, 0xEBC258, 0x711F3C, 0x488B81, 0xEBC258,\
+					0xD67D4C, 0xA62F2B, 0xEBC258, 0x711F3C
 typedef struct 	s_point
 {
 	long double x;
@@ -62,20 +66,21 @@ typedef struct 	s_asset
 	void		*win_ptr;
 	int 		MaxIter;
 	t_fractal	f;
-	int			rgb[16];
+	int			*rgb;
 	t_img		img;
 	int 		key;
 	t_delta		delta;
 	long double x;
 	long double y;
-	long double t;
+	long double dx;
+	long double dy;
 	int 		i;
 	int 		j;
 	t_point 	point;
 }				t_asset;
 
 int 			get_color(int current, int start, t_asset *p);
-void			ft_draw_mandelbrot(t_asset *p);
+void			ft_draw_fractal(t_asset *p);
 void			ft_scale(t_fractal* e,int mouse_x, int mouse_y, long double scale);
 int				ft_close_window(void);
 int				ft_key_press(int keycode, t_asset *p);
