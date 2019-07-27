@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/24 20:24:25 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/27 14:17:42 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ typedef struct 	s_asset
 	int 		i;
 	int 		j;
 	int 		julia;
+	int 		julia_move;
+	char 		*str;
 	t_point 	point;
 }				t_asset;
 

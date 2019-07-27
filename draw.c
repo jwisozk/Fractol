@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 16:59:55 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/24 20:22:28 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/27 14:55:45 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	ft_draw_fractal(t_asset *p)
 
 	threadsId = (pthread_t*) malloc(DH * sizeof(pthread_t));
 	threadData = (t_asset*) malloc(DH * sizeof(t_asset));
+	if (threadsId == NULL || threadData == NULL)
+		ft_print_error("Error: malloc didn't allocate memory.");
 	p->delta.Re = (p->f.ReMax - p->f.ReMin) / (DW - 1);
 	p->delta.Im = (p->f.ImMax - p->f.ImMin) / (DH - 1);
 	p->point.y = p->f.ImMin;
@@ -104,6 +106,9 @@ void	ft_draw_fractal(t_asset *p)
 		if (pthread_join(threadsId[p->i++], NULL) != 0)
 			ft_print_error("Error: the threads has not been joined.");
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img.img_ptr, 0, 0);
+	p->str = ft_strjoin("Max iterations: ", ft_itoa(p->MaxIter));
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 21, DH - 39, 0xFFFFFF, p->str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, DH - 40, 0xFFAA00, p->str);
 	free(threadsId);
 	free(threadData);
 }

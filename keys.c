@@ -78,8 +78,10 @@ int		ft_key_press(int keycode, t_asset *p)
 			mlx_clear_window(p->mlx_ptr, p->win_ptr);
 			ft_draw_fractal(p);
 		}
+		if (p->julia_move == 0)
+			p->julia_move = 1;
 		else
-			p->julia = 0;
+			p->julia_move = 0;
 	}
 	return (0);
 }

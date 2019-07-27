@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/24 20:46:51 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/27 13:02:44 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_init_fractal(t_asset *p)
 	p->MaxIter = MAX_ITER;
 	p->key = 1;
 	p->julia = 0;
+	p->julia_move = 0;
 	p->cx = CX;
 	p->cy = CY;
 	ft_set_init_colors(p);
@@ -47,6 +48,7 @@ void	ft_init_fractals(t_asset *main, t_asset *p)
 	p->key = main->key;
 	p->i = main->i;
 	p->julia = main->julia;
+	p->julia_move = main->julia;
 	p->cx = main->cx;
 	p->cy = main->cy;
 	p->img.img_arr = main->img.img_arr;
