@@ -6,21 +6,25 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 12:52:18 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/24 20:06:25 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/27 17:42:27 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		ft_close_window(void)
+int		ft_close_window(t_asset *p)
 {
+	mlx_destroy_window(p->mlx_ptr, p->win_ptr);
+	(*p->windows)--;
+	if (*p->windows > 0)
+		return (1);
 	exit(0);
 }
 
 int		ft_key_press(int keycode, t_asset *p)
 {
 	if (keycode == 53)
-		ft_close_window();
+		ft_close_window(p);
 	if (keycode == 19)
 	{
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
@@ -82,6 +86,18 @@ int		ft_key_press(int keycode, t_asset *p)
 			p->julia_move = 1;
 		else
 			p->julia_move = 0;
+	}
+	if (keycode == 47)
+	{
+		p->MaxIter++;
+		mlx_clear_window(p->mlx_ptr, p->win_ptr);
+		ft_draw_fractal(p);
+	}
+	if (keycode == 43)
+	{
+		p->MaxIter--;
+		mlx_clear_window(p->mlx_ptr, p->win_ptr);
+		ft_draw_fractal(p);
 	}
 	return (0);
 }

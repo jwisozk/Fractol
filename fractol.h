@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/27 14:17:42 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/27 17:45:11 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <math.h>
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
+# include <sys/types.h>
+# include <unistd.h>
 
 # define DW 1600
 # define DH 855
@@ -84,12 +86,13 @@ typedef struct 	s_asset
 	int 		julia_move;
 	char 		*str;
 	t_point 	point;
+	int 		*windows;
 }				t_asset;
 
 int 			get_color(int current, int start, t_asset *p);
 void			ft_draw_fractal(t_asset *p);
 void			ft_scale(t_fractal* e,int mouse_x, int mouse_y, long double scale);
-int				ft_close_window(void);
+int				ft_close_window(t_asset *p);
 int				ft_key_press(int keycode, t_asset *p);
 int				ft_mouse_press(int button, int x, int y, t_asset *p);
 int 			ft_set_rgb(int r, int g, int b);

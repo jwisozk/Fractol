@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/27 13:02:44 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/27 18:53:39 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,36 +54,53 @@ void	ft_init_fractals(t_asset *main, t_asset *p)
 	p->img.img_arr = main->img.img_arr;
 }
 
-void	ft_open_window(void)
+void	ft_open_window(int n, char **name)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_asset	p;
+	t_asset	p[n];
+	int 	windows;
+	int i;
 
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, DW, DH + HEADER, "Fractal");
-	p.img.img_ptr = mlx_new_image(mlx_ptr, DW, DH);
-	p.img.img_arr = (int*)mlx_get_data_addr(p.img.img_ptr, &p.img.bits_per_pixel, &p.img.size_line, &p.img.endian);
-	p.mlx_ptr = mlx_ptr;
-	p.win_ptr = win_ptr;
-	ft_init_fractal(&p);
-	ft_draw_fractal(&p);
-	mlx_hook(win_ptr, 17, 0, ft_close_window, 0);
-	mlx_hook(win_ptr, 2, 0, ft_key_press, &p);
-	mlx_hook(win_ptr, 4, 0, ft_mouse_press, &p);
-//	mlx_hook(win_ptr, 5, 0, ft_mouse_release, p);
-	mlx_hook(win_ptr, 6, 0, ft_mouse_move, &p);
+	windows = n;
+	i = 0;
+	while (i < n)
+	{
+		win_ptr = mlx_new_window(mlx_ptr, DW, DH + HEADER, name[i]);
+		p[i].img.img_ptr = mlx_new_image(mlx_ptr, DW, DH);
+		p[i].img.img_arr = (int*)mlx_get_data_addr(p[i].img.img_ptr, &p[i].img.bits_per_pixel, &p[i].img.size_line, &p[i].img.endian);
+		p[i].mlx_ptr = mlx_ptr;
+		p[i].win_ptr = win_ptr;
+		p[i].windows = &windows;
+		ft_init_fractal(&p[i]);
+		if (ft_strequ("Julia", name[i]))
+			p[i].julia = 1;
+		ft_draw_fractal(&p[i]);
+		mlx_hook(win_ptr, 17, 0, ft_close_window, 0);
+		mlx_hook(win_ptr, 2, 0, ft_key_press, &p[i]);
+		mlx_hook(win_ptr, 4, 0, ft_mouse_press, &p[i]);
+		//	mlx_hook(win_ptr, 5, 0, ft_mouse_release, p);
+		mlx_hook(win_ptr, 6, 0, ft_mouse_move, &p[i]);
+		i++;
+	}
 	mlx_loop(mlx_ptr);
 }
 
 int		main(int argc, char **argv)
 {
-	char	*name;
+	char	*name[2];
+	int 	i;
 
-	if (argc == 2)
+	if (argc == 2 || argc == 3)
 	{
-		name = *(argv + 1);
-		ft_open_window();
+		i = 0;
+		while (i < argc - 1)
+		{
+			name[i] = *(argv + 1 + i);
+			i++;
+		}
+		ft_open_window(argc - 1, name);
 	}
 	else
 		ft_print_usage();

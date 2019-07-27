@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/jwisozk/CLionProjects/fractol/draw.c
-fractol.h
-/Users/jwisozk/CLionProjects/fractol/fractol.h
-
 /Users/jwisozk/CLionProjects/fractol/fractol.h
 pthread.h
 -
@@ -19,6 +15,10 @@ libft/libft.h
 /Users/jwisozk/CLionProjects/fractol/libft/libft.h
 minilibx/mlx.h
 /Users/jwisozk/CLionProjects/fractol/minilibx/mlx.h
+sys/types.h
+-
+unistd.h
+-
 stdio.h
 -
 
@@ -29,6 +29,10 @@ stdlib.h
 -
 string.h
 -
+
+/Users/jwisozk/CLionProjects/fractol/main.c
+fractol.h
+/Users/jwisozk/CLionProjects/fractol/fractol.h
 
 /Users/jwisozk/CLionProjects/fractol/minilibx/mlx.h
 
