@@ -6,35 +6,35 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:27:57 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/23 20:51:02 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/30 17:28:56 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double interpolate(long double start, long double end, long double interpolation)
+double interpolate(long double start, long double end, double interpolation)
 {
 	return start + ((end - start) * interpolation);
 }
 
-void applyZoom(t_fractal* e, long double mouseRe, long double mouseIm, long double zoomFactor)
+void ft_zoom(t_asset* p, long double mouseRe, long double mouseIm, float scale)
 {
-	double interpolation = 1.0 / zoomFactor;
-	e->ReMin = interpolate(mouseRe, e->ReMin, interpolation);
-	e->ImMin = interpolate(mouseIm, e->ImMin, interpolation);
-	e->ReMax = interpolate(mouseRe, e->ReMax, interpolation);
-	e->ImMax = interpolate(mouseIm, e->ImMax, interpolation);
+	double interpolation =  1.0 / scale;
+	p->f.ReMin = interpolate(mouseRe, p->f.ReMin, interpolation);
+	p->f.ImMin = interpolate(mouseIm, p->f.ImMin, interpolation);
+	p->f.ReMax = interpolate(mouseRe, p->f.ReMax, interpolation);
+	p->f.ImMax = interpolate(mouseIm, p->f.ImMax, interpolation);
 //	printf("ReMin = %.100Lf\nReMax = %.100Lf\nImMin = %.100Lf\nImMax = %.100Lf\n\n\n\n", e->ReMin, e->ReMax, e->ImMin, e->ImMax);
 }
 
-void	ft_scale(t_fractal* e, int mouse_x, int mouse_y, long double scale)
+void	ft_scale(t_asset *p, int x, int y, float scale)
 {
 	long double mouseRe;
 	long double mouseIm;
 
-	mouseRe = (long double)mouse_x / (DW / (e->ReMax - e->ReMin)) + e->ReMin;
-	mouseIm = (long double)mouse_y / (DH / (e->ImMax - e->ImMin)) + e->ImMin;
+	mouseRe = ft_map(x, 0, DW, p->f.ReMin, p->f.ReMax);
+	mouseIm = ft_map(y, 0, DH, p->f.ImMin, p->f.ImMax);
 //	printf("mouse_x = %i\nmouse_y = %i\nmouseRe = %Lf\nmouseIm = %Lf\n", mouse_x, mouse_y, mouseRe, mouseIm);
-	applyZoom(e, mouseRe, mouseIm, scale);
+	ft_zoom(p, mouseRe, mouseIm, scale);
 }
 

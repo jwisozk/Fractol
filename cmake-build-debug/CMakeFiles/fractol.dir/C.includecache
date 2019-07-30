@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/Users/jwisozk/CLionProjects/fractol/color.c
+fractol.h
+/Users/jwisozk/CLionProjects/fractol/fractol.h
+
+/Users/jwisozk/CLionProjects/fractol/draw.c
+fractol.h
+/Users/jwisozk/CLionProjects/fractol/fractol.h
+
 /Users/jwisozk/CLionProjects/fractol/fractol.h
 pthread.h
 -
@@ -22,6 +30,10 @@ unistd.h
 stdio.h
 -
 
+/Users/jwisozk/CLionProjects/fractol/keys.c
+fractol.h
+/Users/jwisozk/CLionProjects/fractol/fractol.h
+
 /Users/jwisozk/CLionProjects/fractol/libft/libft.h
 unistd.h
 -
@@ -35,4 +47,12 @@ fractol.h
 /Users/jwisozk/CLionProjects/fractol/fractol.h
 
 /Users/jwisozk/CLionProjects/fractol/minilibx/mlx.h
+
+/Users/jwisozk/CLionProjects/fractol/mouse.c
+fractol.h
+/Users/jwisozk/CLionProjects/fractol/fractol.h
+
+/Users/jwisozk/CLionProjects/fractol/scale.c
+fractol.h
+/Users/jwisozk/CLionProjects/fractol/fractol.h
 
