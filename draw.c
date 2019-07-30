@@ -55,7 +55,10 @@ void	ft_get_iter(t_asset *p)
 		p->dy = p->y * p->y;
 		if (p->dx + p->dy > 4.0)
 			break ;
-		p->y = 2.0 * p->x * p->y + p->cy;
+		if (p->ship == 1)
+			p->y = 2.0 * fabs((float)p->x * (float)p->y) + p->cy;
+		else
+			p->y = 2.0 * p->x * p->y + p->cy;
 		p->x = p->dx - p->dy + p->cx;
 		iter++;
 	}

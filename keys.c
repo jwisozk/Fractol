@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 12:52:18 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/27 17:42:27 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/30 17:53:50 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ int		ft_key_press(int keycode, t_asset *p)
 	}
 	if (keycode == 20)
 	{
-		printf("%i\n",p->julia);
+
 		if (p->julia == 0)
 		{
+			ft_init_fractal(p);
 			p->julia = 1;
 			p->cx = CX;
 			p->cy = CY;
@@ -97,6 +98,13 @@ int		ft_key_press(int keycode, t_asset *p)
 	{
 		p->MaxIter--;
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
+		ft_draw_fractal(p);
+	}
+	if (keycode == 21)
+	{
+		mlx_clear_window(p->mlx_ptr, p->win_ptr);
+		ft_init_fractal(p);
+		p->ship = 1;
 		ft_draw_fractal(p);
 	}
 	return (0);

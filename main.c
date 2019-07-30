@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/27 18:53:39 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/30 17:51:30 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_init_fractal(t_asset *p)
 	p->f.ImMax = p->f.ImMin + h;
 	p->MaxIter = MAX_ITER;
 	p->key = 1;
+	p->ship = 0;
 	p->julia = 0;
 	p->julia_move = 0;
 	p->cx = CX;
@@ -47,6 +48,7 @@ void	ft_init_fractals(t_asset *main, t_asset *p)
 	p->MaxIter = main->MaxIter;
 	p->key = main->key;
 	p->i = main->i;
+	p->ship = main->ship;
 	p->julia = main->julia;
 	p->julia_move = main->julia;
 	p->cx = main->cx;

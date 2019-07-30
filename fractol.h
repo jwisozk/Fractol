@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/30 17:28:56 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/30 17:29:21 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct 	s_asset
 	int 		j;
 	int 		julia;
 	int 		julia_move;
+	int 		ship;
 	char 		*str;
 	t_point 	point;
 	int 		*windows;
