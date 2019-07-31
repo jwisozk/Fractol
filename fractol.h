@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:27:05 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/30 17:29:21 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/31 18:38:15 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,19 @@ typedef struct 	s_asset
 	int 		*windows;
 }				t_asset;
 
-int 			get_color(int current, int start, t_asset *p);
+int 			get_color(int current, t_asset *p);
 void			ft_draw_fractal(t_asset *p);
 void			ft_scale(t_asset *p, int x, int y, float scale);
 int				ft_close_window(t_asset *p);
 int				ft_key_press(int keycode, t_asset *p);
 int				ft_mouse_press(int button, int x, int y, t_asset *p);
-int 			ft_set_rgb(int r, int g, int b);
-void 			ft_set_random_colors(t_asset *p);
 void 			ft_set_init_colors(t_asset *p);
 void 			ft_set_second_colors(t_asset *p);
 void			ft_init_fractal(t_asset *p);
 void			ft_init_fractals(t_asset *main, t_asset *p);
 int				ft_mouse_move(int x, int y, t_asset *p);
-long double 	ft_map(long double n, int st1, int end1, float st2, float end2);
+long double 	ft_map(long double n, int len, long double min, long double max);
+int				ft_smooth_color(int n, t_asset *p);
 
 # include <stdio.h>
 

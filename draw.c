@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 16:59:55 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/27 17:18:27 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/07/31 19:00:17 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ void	ft_put_color(t_asset *p, int iter)
 			n = iter % 16;
 			p->img.img_arr[p->i * DW + p->j] = p->rgb[n];
 		}
+		else if (p->key == 3)
+		{
+			p->img.img_arr[p->i * DW + p->j] = ft_smooth_color(iter, p);
+		}
 		else
-			p->img.img_arr[p->i * DW + p->j] = get_color(iter, 0, p);
+			p->img.img_arr[p->i * DW + p->j] = get_color(iter, p);
 	}
 	else
 		p->img.img_arr[p->i * DW + p->j] = 0x000000;

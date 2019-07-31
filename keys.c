@@ -34,7 +34,7 @@ int		ft_key_press(int keycode, t_asset *p)
 		if (p->key == 2)
 			ft_set_second_colors(p);
 		ft_draw_fractal(p);
-		if (p->key == 6)
+		if (p->key == 5)
 			p->key = 0;
 	}
 	if (keycode == 123 || keycode == 0)
