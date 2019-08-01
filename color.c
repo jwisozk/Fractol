@@ -34,7 +34,7 @@ int				get_color(int current, t_asset *p)
 	int		blue;
 	double	percentage;
 
-	percentage = percent(0, p->MaxIter, current);
+	percentage = percent(0, p->maxiter, current);
 	red = get_light((0xFF0000 >> 16) & 0xFF, (0x00 >> 16) & 0xFF, percentage);
 	green = get_light((0x00FF00 >> 8) & 0xFF, (0x00 >> 8) & 0xFF, percentage);
 	blue = get_light(0x0000FF & 0xFF, 0x00 & 0xFF, percentage);
@@ -48,7 +48,7 @@ int				ft_smooth_color(int n, t_asset *p)
 	int		g;
 	int		b;
 
-	t = (double)n / (double)p->MaxIter;
+	t = (double)n / (double)p->maxiter;
 	r = (int)(9 * (1 - t) * t * t * t * 255);
 	g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
 	b = (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);

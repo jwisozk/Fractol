@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/08/01 13:25:06 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/08/01 20:36:43 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,28 @@ void		ft_init_fractal(t_asset *p)
 
 	w = RE_LEN;
 	h = (w * DH) / DW;
-	p->f.ReMin = -w / 2;
-	p->f.ReMax = p->f.ReMin + w;
-	p->f.ImMin = -h / 2;
-	p->f.ImMax = p->f.ImMin + h;
-	p->MaxIter = MAX_ITER;
+	p->f.remin = -w / 2;
+	p->f.remax = p->f.remin + w;
+	p->f.immin = -h / 2;
+	p->f.immax = p->f.immin + h;
+	p->maxiter = MAX_ITER;
 	p->key = 1;
 	p->ship = 0;
 	p->julia = 0;
 	p->julia_move = 0;
 	p->cx = CX;
 	p->cy = CY;
-	p->zoom	= 0;
+	p->zoom = 0;
 	ft_set_init_colors(p);
 }
 
 void		ft_init_fractals(t_asset *main, t_asset *p)
 {
 	ft_set_init_colors(p);
-	p->delta.Re = main->delta.Re;
+	p->delta.re = main->delta.re;
 	p->point.y = main->point.y;
-	p->f.ReMin = main->f.ReMin;
-	p->MaxIter = main->MaxIter;
+	p->f.remin = main->f.remin;
+	p->maxiter = main->maxiter;
 	p->key = main->key;
 	p->i = main->i;
 	p->ship = main->ship;

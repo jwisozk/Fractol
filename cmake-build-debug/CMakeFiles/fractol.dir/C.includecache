@@ -6,14 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/jwisozk/CLionProjects/fractol/color.c
-fractol.h
-/Users/jwisozk/CLionProjects/fractol/fractol.h
-
-/Users/jwisozk/CLionProjects/fractol/draw.c
-fractol.h
-/Users/jwisozk/CLionProjects/fractol/fractol.h
-
 /Users/jwisozk/CLionProjects/fractol/fractol.h
 pthread.h
 -
@@ -23,16 +15,6 @@ libft/libft.h
 /Users/jwisozk/CLionProjects/fractol/libft/libft.h
 minilibx/mlx.h
 /Users/jwisozk/CLionProjects/fractol/minilibx/mlx.h
-sys/types.h
--
-unistd.h
--
-stdio.h
--
-
-/Users/jwisozk/CLionProjects/fractol/keys.c
-fractol.h
-/Users/jwisozk/CLionProjects/fractol/fractol.h
 
 /Users/jwisozk/CLionProjects/fractol/libft/libft.h
 unistd.h

@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 12:52:18 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/08/01 12:58:21 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/08/01 20:21:26 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,55 +21,39 @@ int		ft_close_window(t_asset *p)
 	exit(0);
 }
 
-int		ft_key_press(int keycode, t_asset *p)
+void	ft_move(int key, t_asset *p)
 {
-	if (keycode == 53)
-		ft_close_window(p);
-	if (keycode == 10)
+	if (key == 123 || key == 0)
 	{
-		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		p->key++;
-		if (p->key == 1)
-			ft_set_init_colors(p);
-		ft_draw_fractal(p);
-		if (p->key == 3)
-			p->key = 0;
+		p->f.remin += p->delta.re * OFFSET;
+		p->f.remax += p->delta.re * OFFSET;
 	}
-	if (keycode == 123 || keycode == 0)
+	if (key == 124 || key == 2)
 	{
-		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		p->f.ReMin += p->delta.Re * OFFSET;
-		p->f.ReMax += p->delta.Re * OFFSET;
-		ft_draw_fractal(p);
+		p->f.remin -= p->delta.re * OFFSET;
+		p->f.remax -= p->delta.re * OFFSET;
 	}
-	if (keycode == 124 || keycode == 2)
+	if (key == 125 || key == 1)
 	{
-		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		p->f.ReMin -= p->delta.Re * OFFSET;
-		p->f.ReMax -= p->delta.Re * OFFSET;
-		ft_draw_fractal(p);
+		p->f.immin -= p->delta.im * OFFSET;
+		p->f.immax -= p->delta.im * OFFSET;
 	}
-	if (keycode == 125 || keycode == 1)
+	if (key == 126 || key == 13)
 	{
-		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		p->f.ImMin -= p->delta.Im * OFFSET;
-		p->f.ImMax -= p->delta.Im * OFFSET;
-		ft_draw_fractal(p);
+		p->f.immin += p->delta.im * OFFSET;
+		p->f.immax += p->delta.im * OFFSET;
 	}
-	if (keycode == 126 || keycode == 13)
+	mlx_clear_window(p->mlx_ptr, p->win_ptr);
+	ft_draw_fractal(p);
+}
+
+void	ft_switch_fractal(int key, t_asset *p)
+{
+	if (key == 18)
 	{
-		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		p->f.ImMin += p->delta.Im * OFFSET;
-		p->f.ImMax += p->delta.Im * OFFSET;
-		ft_draw_fractal(p);
-	}
-	if (keycode == 18)
-	{
-		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		ft_init_fractal(p);
-		ft_draw_fractal(p);
 	}
-	if (keycode == 19)
+	if (key == 19)
 	{
 		if (p->julia_move == 0)
 			p->julia_move = 1;
@@ -81,30 +65,46 @@ int		ft_key_press(int keycode, t_asset *p)
 			p->julia = 1;
 			p->cx = CX;
 			p->cy = CY;
-			mlx_clear_window(p->mlx_ptr, p->win_ptr);
-			ft_draw_fractal(p);
 		}
-
 	}
-	if (keycode == 20)
+	if (key == 20)
 	{
-		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		ft_init_fractal(p);
 		p->ship = 1;
-		ft_draw_fractal(p);
 	}
-	if (keycode == 47)
-	{
-		p->MaxIter++;
-		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		ft_draw_fractal(p);
-	}
-	if (keycode == 43)
-	{
-		p->MaxIter--;
-		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		ft_draw_fractal(p);
-	}
+	mlx_clear_window(p->mlx_ptr, p->win_ptr);
+	ft_draw_fractal(p);
+}
 
+void	ft_change_maxiter(int key, t_asset *p)
+{
+	if (key == 47)
+		p->maxiter++;
+	if (key == 43)
+		p->maxiter--;
+	mlx_clear_window(p->mlx_ptr, p->win_ptr);
+	ft_draw_fractal(p);
+}
+
+int		ft_key_press(int key, t_asset *p)
+{
+	if (key == 53)
+		ft_close_window(p);
+	if (key == 10)
+	{
+		mlx_clear_window(p->mlx_ptr, p->win_ptr);
+		p->key++;
+		if (p->key == 1)
+			ft_set_init_colors(p);
+		ft_draw_fractal(p);
+		if (p->key == 3)
+			p->key = 0;
+	}
+	if ((key >= 123 && key <= 126) || (key >= 0 && key <= 2) || key == 13)
+		ft_move(key, p);
+	if (key >= 18 && key <= 20)
+		ft_switch_fractal(key, p);
+	if (key == 43 || key == 47)
+		ft_change_maxiter(key, p);
 	return (0);
 }
