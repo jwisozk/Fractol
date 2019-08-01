@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 14:05:44 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/31 19:11:26 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/08/01 12:15:33 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,10 @@ int get_color(int current, t_asset *p)
 	double  percentage;
 
 	percentage = percent(0, p->MaxIter, current);
-	if (p->key == 4)
-	{
-		red = get_light((0x000000 >> 16) & 0xFF, (0xFF0000 >> 16) & 0xFF, percentage);
-		return (red << 16);
-	}
-	else
-	{
-		red = get_light((0xFF0000 >> 16) & 0xFF, (0x000000 >> 16) & 0xFF, percentage);
-		green = get_light((0x00FF00  >> 8) & 0xFF, (0x000000 >> 8) & 0xFF, percentage);
-		blue = get_light(0x0000FF  & 0xFF, 0x000000 & 0xFF, percentage);
-		return ( (red << 16) | (green << 8) | blue);
-	}
+	red = get_light((0xFF0000 >> 16) & 0xFF, (0x000000 >> 16) & 0xFF, percentage);
+	green = get_light((0x00FF00  >> 8) & 0xFF, (0x000000 >> 8) & 0xFF, percentage);
+	blue = get_light(0x0000FF  & 0xFF, 0x000000 & 0xFF, percentage);
+	return ( (red << 16) | (green << 8) | blue);
 }
 
 int ft_smooth_color(int n, t_asset *p)
@@ -57,15 +49,9 @@ int ft_smooth_color(int n, t_asset *p)
 	int g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
 	int b =  (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
 	return ((r << 16) | (g << 8) | b);
-
 }
 void ft_set_init_colors(t_asset *p)
 {
 	static int rgb[16] = {INIT_COLOR};
-	p->rgb = rgb;
-}
-void ft_set_second_colors(t_asset *p)
-{
-	static int rgb[16] = {SCND_COLOR};
 	p->rgb = rgb;
 }

@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 12:52:18 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/30 17:53:50 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/08/01 12:58:21 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,14 @@ int		ft_key_press(int keycode, t_asset *p)
 {
 	if (keycode == 53)
 		ft_close_window(p);
-	if (keycode == 19)
+	if (keycode == 10)
 	{
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		p->key++;
 		if (p->key == 1)
 			ft_set_init_colors(p);
-		if (p->key == 2)
-			ft_set_second_colors(p);
 		ft_draw_fractal(p);
-		if (p->key == 5)
+		if (p->key == 3)
 			p->key = 0;
 	}
 	if (keycode == 123 || keycode == 0)
@@ -71,9 +69,12 @@ int		ft_key_press(int keycode, t_asset *p)
 		ft_init_fractal(p);
 		ft_draw_fractal(p);
 	}
-	if (keycode == 20)
+	if (keycode == 19)
 	{
-
+		if (p->julia_move == 0)
+			p->julia_move = 1;
+		else
+			p->julia_move = 0;
 		if (p->julia == 0)
 		{
 			ft_init_fractal(p);
@@ -83,10 +84,14 @@ int		ft_key_press(int keycode, t_asset *p)
 			mlx_clear_window(p->mlx_ptr, p->win_ptr);
 			ft_draw_fractal(p);
 		}
-		if (p->julia_move == 0)
-			p->julia_move = 1;
-		else
-			p->julia_move = 0;
+
+	}
+	if (keycode == 20)
+	{
+		mlx_clear_window(p->mlx_ptr, p->win_ptr);
+		ft_init_fractal(p);
+		p->ship = 1;
+		ft_draw_fractal(p);
 	}
 	if (keycode == 47)
 	{
@@ -100,12 +105,6 @@ int		ft_key_press(int keycode, t_asset *p)
 		mlx_clear_window(p->mlx_ptr, p->win_ptr);
 		ft_draw_fractal(p);
 	}
-	if (keycode == 21)
-	{
-		mlx_clear_window(p->mlx_ptr, p->win_ptr);
-		ft_init_fractal(p);
-		p->ship = 1;
-		ft_draw_fractal(p);
-	}
+
 	return (0);
 }

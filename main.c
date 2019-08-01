@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/30 17:51:30 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/08/01 12:52:53 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	ft_print_usage(void)
 {
-	ft_putstr("Usage: ./fractol [\n\t- Julia\n\t- Mandelbrot\n\t- optional\n]");
+	ft_putstr("Usage: ./fractol "\
+	"[\n\t- Julia\n\t- Mandelbrot\n\t- BurningShip\n]" \
+	"[optional: Julia, Mandelbrot, BurningShip]");
 	ft_putchar('\n');
 }
 void	ft_init_fractal(t_asset *p)
@@ -38,10 +40,8 @@ void	ft_init_fractal(t_asset *p)
 
 void	ft_init_fractals(t_asset *main, t_asset *p)
 {
-	if (main->key == 1)
-		ft_set_init_colors(p);
-	if (main->key == 2)
-		ft_set_second_colors(p);
+
+	ft_set_init_colors(p);
 	p->delta.Re = main->delta.Re;
 	p->point.y = main->point.y;
 	p->f.ReMin = main->f.ReMin;
@@ -78,8 +78,10 @@ void	ft_open_window(int n, char **name)
 		ft_init_fractal(&p[i]);
 		if (ft_strequ("Julia", name[i]))
 			p[i].julia = 1;
+		if (ft_strequ("BurningShip", name[i]))
+			p[i].ship = 1;
 		ft_draw_fractal(&p[i]);
-		mlx_hook(win_ptr, 17, 0, ft_close_window, 0);
+		mlx_hook(win_ptr, 17, 0, ft_close_window, &p[i]);
 		mlx_hook(win_ptr, 2, 0, ft_key_press, &p[i]);
 		mlx_hook(win_ptr, 4, 0, ft_mouse_press, &p[i]);
 		//	mlx_hook(win_ptr, 5, 0, ft_mouse_release, p);

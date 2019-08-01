@@ -25,12 +25,12 @@ void	ft_put_color(t_asset *p, int iter)
 
 	if (iter < p->MaxIter)
 	{
-		if (p->key == 1 || p->key == 2)
+		if (p->key == 1)
 		{
 			n = iter % 16;
 			p->img.img_arr[p->i * DW + p->j] = p->rgb[n];
 		}
-		else if (p->key == 3)
+		else if (p->key == 2)
 		{
 			p->img.img_arr[p->i * DW + p->j] = ft_smooth_color(iter, p);
 		}
