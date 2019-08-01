@@ -6,11 +6,18 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 12:54:18 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/07/31 13:44:02 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/08/01 13:57:34 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int		ft_print_error(char *str)
+{
+	ft_putstr(str);
+	ft_putchar('\n');
+	exit(0);
+}
 
 long double ft_map(long double n, int len, long double min, long double max)
 {
@@ -22,11 +29,13 @@ int		ft_mouse_press(int button, int x, int y, t_asset *p)
 	mlx_clear_window(p->mlx_ptr, p->win_ptr);
 	if (button == 5 && p->f.ReMax - p->f.ReMin > 0.00000000000001 && y > 0)
 	{
+		p->zoom += p->MaxIter / 50;
 		p->MaxIter += SCALE * 3;
 		ft_scale(p, x, y, SCALE);
 	}
 	if (button == 4 && p->f.ReMax - p->f.ReMin < 1000 && y > 0)
 	{
+		p->zoom -= p->MaxIter / 50;
 		p->MaxIter -= SCALE * 3;
 		ft_scale(p, x, y, 1.0 / SCALE);
 	}
