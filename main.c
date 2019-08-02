@@ -6,7 +6,7 @@
 /*   By: jwisozk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:28:03 by jwisozk           #+#    #+#             */
-/*   Updated: 2019/08/01 20:36:43 by jwisozk          ###   ########.fr       */
+/*   Updated: 2019/08/02 14:54:34 by jwisozk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	ft_print_usage(void)
 	"[\n\t- Julia\n\t- Mandelbrot\n\t- BurningShip\n]" \
 	"[optional: Julia, Mandelbrot, BurningShip]");
 	ft_putchar('\n');
+	exit(0);
 }
 
 void		ft_init_fractal(t_asset *p)
@@ -101,6 +102,10 @@ int			main(int argc, char **argv)
 		while (i < argc - 1)
 		{
 			name[i] = *(argv + 1 + i);
+			if (ft_strequ("Mandelbrot", name[i]) +
+				ft_strequ("Julia", name[i]) +
+				ft_strequ("BurningShip", name[i]) == 0)
+				ft_print_usage();
 			i++;
 		}
 		i = 0;
